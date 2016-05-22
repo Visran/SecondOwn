@@ -1,0 +1,10 @@
+#!/bin/bash
+protected_branch='master'
+# check each branch being committed
+current_branch=$(git symbolic-ref HEAD | sed -e 's,.*/\(.*\),\1,')
+if [ $protected_branch = $current_branch ]
+then
+echo "Direct commits to the branch master are not allowed"
+exit 1
+fi
+exit 0
