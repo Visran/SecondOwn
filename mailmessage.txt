@@ -1,0 +1,23 @@
+Hi All,
+
+Just a quick solution for issues which many of us face everytime we use push code to git.
+
+1. Create a pull request with only our changes - 
+Issue: When already a pull request is available on github in open state to be merged in a particular branch and if we raise a new pull request to get it merge in same branch, github collates both branches and provide single pull request to the reviewer. It may lead to both commits getting merged to the branch, though only one was required.
+Solution: Use cherry-pick
+git checkout team_Framework   /// checkout from branch to which pull request is intended
+git pull origin team_Framework
+git checkout -b your_branch /// create a new branch from the branch to which pull request is intended
+git status
+git add <files>
+git commit -m "Message"
+git cherry-pick <sha hash of commit>
+git push origin your_branch
+
+Go to github and create a pull request from your branch. This will have only your changes.
+
+2. Stop pushing code directly to master
+If you are not supposed to push your code to master, and every time you double check that where my git command is pushing, use these below mentioned hooks and it will not allow you to push directly to master.
+>> pre-commit
+>> pre-push
+Place these files in .git/hooks folder
